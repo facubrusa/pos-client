@@ -51,7 +51,8 @@ const ProductProvider = ( { children } : props) => {
                                     active: 1,
                                     stock: 5,
                                     max_quantity_selectable: 1,
-                                    selected_quantity: 0
+                                    selected_quantity: 0,
+                                    group_preference_id: 1
                                 },
                                 {
                                     id: 2,
@@ -60,7 +61,8 @@ const ProductProvider = ( { children } : props) => {
                                     active: 1,
                                     stock: 5,
                                     max_quantity_selectable: 1,
-                                    selected_quantity: 0
+                                    selected_quantity: 0,
+                                    group_preference_id: 1
                                 },
                                 {
                                     id: 3,
@@ -69,7 +71,8 @@ const ProductProvider = ( { children } : props) => {
                                     active: 1,
                                     stock: 5,
                                     max_quantity_selectable: 1,
-                                    selected_quantity: 0
+                                    selected_quantity: 0,
+                                    group_preference_id: 1
                                 }
                             ]
                         },
@@ -86,7 +89,8 @@ const ProductProvider = ( { children } : props) => {
                                     active: 1,
                                     stock: 5,
                                     max_quantity_selectable: 1,
-                                    selected_quantity: 0
+                                    selected_quantity: 0,
+                                    group_preference_id: 2
                                 },
                                 {
                                     id: 2,
@@ -95,7 +99,8 @@ const ProductProvider = ( { children } : props) => {
                                     active: 1,
                                     stock: 5,
                                     max_quantity_selectable: 1,
-                                    selected_quantity: 0
+                                    selected_quantity: 0,
+                                    group_preference_id: 2
                                 },
                                 {
                                     id: 3,
@@ -104,7 +109,8 @@ const ProductProvider = ( { children } : props) => {
                                     active: 1,
                                     stock: 5,
                                     max_quantity_selectable: 1,
-                                    selected_quantity: 0
+                                    selected_quantity: 0,
+                                    group_preference_id: 2
                                 }
                             ]
                         }

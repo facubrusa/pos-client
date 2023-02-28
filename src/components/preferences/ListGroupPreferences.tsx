@@ -11,8 +11,8 @@ const ListGroupPreferences = ({groups_preference}: Props) => {
       <p style={{marginBottom: '.5rem'}}>Preferences Group</p>
       <div className="card-body select-preferences">
         <ul className="list-groups">
-          { groups_preference.map(group_preference =>
-              <GroupPreferenceItem key={group_preference.id} group_preference={group_preference}/>
+          { groups_preference.map((group_preference, index) =>
+              <GroupPreferenceItem key={index} group_preference={group_preference}/>
           ) }
         </ul>
       </div>

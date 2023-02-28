@@ -41,7 +41,8 @@ interface Preference {
   active: number,
   stock: number,
   max_quantity_selectable: number,
-  selected_quantity: number
+  selected_quantity: number,
+  group_preference_id: number
 }
 
 interface GroupPreference {

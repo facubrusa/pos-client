@@ -6,13 +6,13 @@ type Props = {
 }
 
 const GroupPreferenceItem = ({group_preference}: Props) => {
-  const { id, name, max_quantity, minimum_required, preferences } = group_preference;
+  const { name, max_quantity, minimum_required, preferences } = group_preference;
   const nameColumn = name.length > 7 ? 3 : 2;
   const preferencesColumn = 12 - nameColumn;
   return ( 
     <li className="row">
       <div className={'col-' + nameColumn}>
-        <span>{name} ({max_quantity})</span>
+        <span>{name}{ max_quantity === -1 ? '' : ` (${max_quantity})` }</span>
         {minimum_required === 0 && <span className="required">*</span>}
       </div>
       <div className={'col-' + preferencesColumn} style={{paddingLeft: 0}}>

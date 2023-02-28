@@ -29,17 +29,17 @@ const PreferenceItem = ({index, preference, state}: Props) => {
     if (product) {
       const { groups_preference, selected_quantity } = product;
       if (groups_preference) {
-        /* const group_preference = groups_preference.filter(group_preference => group_preference.id = group_preference_id)[0];
-        const { max_quantity, minimum_required, preferences } = group_preference;
+        const group_preference = groups_preference.filter(group_preference => group_preference.id ===  preference.group_preference_id)[0];
+        const { max_quantity, preferences } = group_preference;
         if (max_quantity === -1) return true;
         const maxPreferences = selected_quantity * max_quantity;
         let countSelectedPreferences = 0;
         preferences.forEach(preference => {
           countSelectedPreferences += preference.selected_quantity;
         });
-        if (countSelectedPreferences > maxPreferences) {
+        if (countSelectedPreferences >= maxPreferences) {
           isValid = false;
-        } */
+        }
       }
     }
 
