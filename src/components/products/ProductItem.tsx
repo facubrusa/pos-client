@@ -1,9 +1,7 @@
 import { Product } from '../../interfaces/interfaces';
 import useProducts from '../../hooks/useProducts';
 
-type Props = {
-  product: Product
-}
+type Props = { product: Product }
 
 const ProductItem = ({product} : Props) => {
   const { id, name, image } = product;

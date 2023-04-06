@@ -17,28 +17,29 @@ const AlertProvider = ( { children } : props) => {
     const [ alertState, dispatch] = useReducer(AlertReducer, initialState);
 
     // Functions
-    const showAlert = (msg: string, category: string) : void => {
-        dispatch({
-            type: 'SHOW_ALERT',
-            payload: {
-                msg,
-                category
-            }
-        });
-
-        // Hide alert after 5s
-        setTimeout(() => {
+    const showAlert = (alert: AlertState["alert"]) : void => {
+        if (alert) {
             dispatch({
-                type: 'HIDE_ALERT',
-                payload: {}
+                type: 'SHOW_ALERT',
+                payload: {
+                    alert
+                }
             });
-        }, 4000);
+
+            // Clean alert after 1ms
+            setTimeout(() => {
+                dispatch({
+                    type: 'HIDE_ALERT',
+                    payload: {}
+                });
+            }, 100); 
+        }
     }
 
     return (
         <AlertContext.Provider
             value={{
-                alertState,
+                alert: alertState["alert"],
                 showAlert
             }}
         >

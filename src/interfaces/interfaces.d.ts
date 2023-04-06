@@ -20,8 +20,9 @@ export interface CategoriesContextProps {
 }
 
 export interface Alert {
-  msg: string,
-  category: string
+  icon: string,
+  title: string,
+  text: string
 }
 
 export type AlertState = {
@@ -29,9 +30,9 @@ export type AlertState = {
 }
 
 export interface AlertContextProps {
-  alertState: AlertState,
+  alert: Alert | null,
   // showAlert() is a function that receive two parameters and return nothing
-  showAlert: (msg: string, category: string) => void 
+  showAlert: (alert: Alert) => void
 }
 
 interface Preference {
@@ -40,6 +41,7 @@ interface Preference {
   added: number,
   active: number,
   stock: number,
+  current_stock: number,
   max_quantity_selectable: number,
   selected_quantity: number,
   group_preference_id: number
@@ -49,7 +51,7 @@ interface GroupPreference {
   id: number,
   max_quantity: number,
   name: string,
-  minimum_required: number,
+  obligatory: boolean,
   preferences: Preference[]
 }
 
@@ -68,10 +70,21 @@ export interface Product {
   groups_preference?: GroupPreference[]
 }
 
+interface SelectedProduct {
+  id: number,
+  name: string,
+  price: number,
+  quantity: number,
+  added: number,
+  preferences: Preference[]
+}
+
 export interface ProductState {
   products: Product[],
   product: Product | null,
-  selectedpreferences: Preference[]
+  selectedpreferences: Preference[],
+  selectedproducts: SelectedProduct[],
+  message: Alert | null
 }
 
 export interface ProductContextProps {
@@ -81,5 +94,8 @@ export interface ProductContextProps {
   addPreference: (preference: Preference) => void,
   removePreference: (index: number) => void,
   cleanSelectedPreferences: () => void,
-  changeProductQuantity: (quantity) => void
+  changeProductQuantity: (quantity) => void,
+  setMessage: (alert) => void,
+  addProduct: (product) => void,
+  cancelSale: () => void,
 }

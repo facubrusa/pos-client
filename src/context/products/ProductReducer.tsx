@@ -18,11 +18,28 @@ const CategoryReducer = (state: ProductState, action: ProductAction): ProductSta
         ...state,
         selectedpreferences: [...state.selectedpreferences, action.payload.preference]
       }
-    case 'DISCOUNT_SELECTED_QUANTITY_PREFERENCE':
+    case 'ADD_PRODUCT':
+      return {
+        ...state,
+        selectedproducts: [...state.selectedproducts, action.payload.product]
+      }
+    case 'DISCOUNT_SELECTED_PREFERENCE':
       return {
         ...state,
         selectedpreferences: state.selectedpreferences.map((preference, index) => {
-          if (index === action.payload.index) preference.selected_quantity--;
+          if (index === action.payload.index) {
+            preference.selected_quantity--;
+            preference.current_stock++;
+          }
+          return preference;
+        })
+      }
+    case 'DISCOUNT_SELECTED_PREFERENCES':
+      return {
+        ...state,
+        selectedpreferences: state.selectedpreferences.map(preference => {
+          preference.selected_quantity = 0;
+          preference.stock = preference.current_stock;
           return preference;
         })
       }
@@ -36,6 +53,7 @@ const CategoryReducer = (state: ProductState, action: ProductAction): ProductSta
         ...state,
         selectedpreferences: state.selectedpreferences.map((preference) => {
           preference.selected_quantity = 0;
+          preference.current_stock = preference.stock;
           return preference;
         })
       }
@@ -49,6 +67,16 @@ const CategoryReducer = (state: ProductState, action: ProductAction): ProductSta
         ...state,
         product: action.payload.product,
         selectedpreferences: []
+      }
+    case 'ERROR_PRODUCT':
+      return {
+        ...state,
+        message: action.payload.alert
+      }
+    case 'CANCEL_SALE':
+      return {
+        ...state,
+        selectedproducts: []
       }
     default:
       return state;

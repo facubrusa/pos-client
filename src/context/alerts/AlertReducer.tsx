@@ -6,7 +6,7 @@ const AlertReducer = (state: AlertState, action: AlertAction): AlertState => {
         case 'SHOW_ALERT':
             return {
                 ...state,
-                alert: action.payload
+                alert: action.payload.alert
             }
         case 'HIDE_ALERT':
             return {

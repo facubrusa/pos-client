@@ -8,16 +8,31 @@ type Props = {
 }
 
 const PreferenceItem = ({index, preference, state}: Props) => {
-  const { addPreference, removePreference, product } = useProducts();
+  const { product, addPreference, removePreference, setMessage } = useProducts();
 
   const handlePreference = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
     if (state === 'select') {
+      if (preference.current_stock < 1) {
+        const message = {
+          icon: 'error',
+          title: 'Oops!',
+          text: 'There is no more stock of the selected preference'
+        };
+        setMessage(message);
+        return;
+      }
+
       const validation = validateSelectedPreferences();
       if (validation) {
         addPreference(preference);
       } else {
-        alert('Exceeded available preference stock');
+        const message = {
+          icon: 'error',
+          title: 'Oops!',
+          text: 'Exceeded limit of selected preferences'
+        };
+        setMessage(message);
       }
     } else {
       removePreference(index);
@@ -42,7 +57,6 @@ const PreferenceItem = ({index, preference, state}: Props) => {
         }
       }
     }
-
     return isValid;
   }
 
@@ -51,7 +65,7 @@ const PreferenceItem = ({index, preference, state}: Props) => {
       href="#!"
       className="btn btn-sm mb-2 green"
       onClick={handlePreference}
-    >{preference.name}</a>
+    >{preference.name} (${preference.added})</a>
   );
 }
  
