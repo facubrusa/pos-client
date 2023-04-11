@@ -7,7 +7,7 @@ const SaleList = () => {
   
   return ( 
     <ul className="list-options">
-      { selectedproducts.length > 0 ? selectedproducts.map((product, key) => <SaleItem key={key} product={product} />) : ''}
+      { selectedproducts.length > 0 ? selectedproducts.map((product, key) => <SaleItem key={key} index={key} product={product} />) : ''}
     </ul>
   );
 }

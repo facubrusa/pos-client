@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer } from 'react';
 
 import ProductContext from './ProductContext';
 import ProductReducer from './ProductReducer';
@@ -62,11 +62,6 @@ const groupProductsById = (products: any) => {
 const ProductProvider = ({ children }: props) => {
   // Dispatch for ejecute actions
   const [productState, dispatch] = useReducer(ProductReducer, INITIAL_STATE);
-
-  useEffect(() => {
-    productState.selectedproducts = loadSelectedProducts();
-    // eslint-disable-next-line
-  }, [productState.selectedproducts]);
 
   const getProducts = (idCategory: number): void => {
     try {
@@ -265,14 +260,23 @@ const ProductProvider = ({ children }: props) => {
       ];
 
       let filterProducts = listProducts.filter(product => product.category_id === idCategory);
-			// console.log(filterProducts);
 			filterProducts = discountStock(filterProducts);
-			console.log(filterProducts);
 
       dispatch({
         type: 'GET_PRODUCTS',
         payload: filterProducts,
       });
+
+      // Validate if exist loaded products
+      const selectedproducts: ProductState["selectedproducts"] = loadSelectedProducts();
+      if (selectedproducts.length > 0) {
+        dispatch({
+          type: 'LOAD_SELECTED_PRODUCTS',
+          payload: {
+            selectedproducts
+          }
+        });
+      }
     } catch (error) {
       console.error(error);
       const message = {
@@ -377,6 +381,17 @@ const ProductProvider = ({ children }: props) => {
     });
   };
 
+  const removeProduct = (index: number) => {
+    const newSelectedProducts = productState.selectedproducts.filter((product, key) => key !== index);
+    localStorage.setItem('selectedproducts', JSON.stringify(newSelectedProducts));
+    dispatch({
+      type: 'REMOVE_PRODUCT',
+      payload: {
+        index
+      }
+    });
+  }
+
   return (
     <ProductContext.Provider
       value={{
@@ -390,6 +405,7 @@ const ProductProvider = ({ children }: props) => {
         setMessage,
         addProduct,
         cancelSale,
+        removeProduct
       }}
     >
       {children}

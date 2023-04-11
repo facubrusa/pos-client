@@ -1,4 +1,4 @@
-import { Alert, Category, Preference, Product, SelectedProduct } from '../interfaces/interfaces';
+import { Alert, Category, Preference, Product, ProductState, SelectedProduct } from '../interfaces/interfaces';
 
 export type CategoryAction = 
 | { type: 'SELECT_CATEGORY', payload: { idCategory: number } }
@@ -21,3 +21,6 @@ export type ProductAction =
 | { type: 'ADD_PRODUCT', payload: { product: SelectedProduct } }
 | { type: 'CANCEL_SALE' }
 | { type: 'DISCOUNT_SELECTED_PREFERENCES' }
+| { type: 'REMOVE_PRODUCT', payload: { index: number } }
+| { type: 'LOAD_SELECTED_PRODUCTS', payload: { selectedproducts: ProductState["selectedproducts"] } }
+

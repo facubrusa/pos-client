@@ -98,4 +98,5 @@ export interface ProductContextProps {
   setMessage: (alert) => void,
   addProduct: (product) => void,
   cancelSale: () => void,
+  removeProduct: (index: number) => void,
 }

@@ -78,6 +78,16 @@ const CategoryReducer = (state: ProductState, action: ProductAction): ProductSta
         ...state,
         selectedproducts: []
       }
+    case 'REMOVE_PRODUCT':
+      return {
+        ...state,
+        selectedproducts: state.selectedproducts.filter((product, key) => key !== action.payload.index)
+      }
+    case 'LOAD_SELECTED_PRODUCTS':
+      return {
+        ...state,
+        selectedproducts: action.payload.selectedproducts
+      }
     default:
       return state;
   }
